@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB36D0BC2A0FAC1200CE9DFC /* CustomCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB36D0BB2A0FAC1200CE9DFC /* CustomCellViewModel.swift */; };
 		AB9DE3392A0C33310069B30E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9DE3382A0C33310069B30E /* AppDelegate.swift */; };
 		AB9DE33B2A0C33310069B30E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9DE33A2A0C33310069B30E /* SceneDelegate.swift */; };
 		AB9DE33D2A0C33310069B30E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9DE33C2A0C33310069B30E /* ViewController.swift */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AB36D0BB2A0FAC1200CE9DFC /* CustomCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCellViewModel.swift; sourceTree = "<group>"; };
 		AB9DE3352A0C33310069B30E /* Cellar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cellar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB9DE3382A0C33310069B30E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB9DE33A2A0C33310069B30E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +69,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AB36D0BA2A0FABFC00CE9DFC /* CustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				AB9DE36B2A0C35F30069B30E /* CustomCell.swift */,
+				AB36D0BB2A0FAC1200CE9DFC /* CustomCellViewModel.swift */,
+			);
+			path = CustomCell;
+			sourceTree = "<group>";
+		};
 		AB9DE32C2A0C33310069B30E = {
 			isa = PBXGroup;
 			children = (
@@ -160,8 +171,8 @@
 		AB9DE3682A0C35AB0069B30E /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				AB36D0BA2A0FABFC00CE9DFC /* CustomCell */,
 				AB9DE3692A0C35CD0069B30E /* CustomTextField.swift */,
-				AB9DE36B2A0C35F30069B30E /* CustomCell.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -261,6 +272,7 @@
 				AB9DE3532A0C33AB0069B30E /* temps.swift in Sources */,
 				AB9DE34E2A0C33670069B30E /* UIView+ext.swift in Sources */,
 				AB9DE33D2A0C33310069B30E /* ViewController.swift in Sources */,
+				AB36D0BC2A0FAC1200CE9DFC /* CustomCellViewModel.swift in Sources */,
 				AB9DE3732A0C36440069B30E /* RegisterViewModel.swift in Sources */,
 				AB9DE35B2A0C340E0069B30E /* LoginViewContracts.swift in Sources */,
 				AB9DE36C2A0C35F30069B30E /* CustomCell.swift in Sources */,
@@ -416,7 +428,6 @@
 				INFOPLIST_FILE = Cellar/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -444,7 +455,6 @@
 				INFOPLIST_FILE = Cellar/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

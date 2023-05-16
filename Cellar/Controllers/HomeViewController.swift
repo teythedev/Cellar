@@ -28,21 +28,20 @@ final class HomeViewController: UIViewController, HomeViewModelDelegate {
     let label: CustomCell = {
         let cell = CustomCell()
         cell.translatesAutoresizingMaskIntoConstraints = false
-        cell.backgroundColor = .blue
         return cell
     }()
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .white
         view.addSubview(label)
         setConstraints()
         viewModel?.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        if Temps.isLoggedIn {
+        if !Temps.isLoggedIn {
             viewModel?.fetchCurrentUser(completion: {[weak self] user in
                 if let user = user {
                     print("\(user.name)")
@@ -62,7 +61,9 @@ final class HomeViewController: UIViewController, HomeViewModelDelegate {
     
     private func setConstraints() {
         NSLayoutConstraint.activate( [
-            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            //label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            label.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            label.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             label.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
 
