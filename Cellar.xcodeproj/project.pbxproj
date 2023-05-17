@@ -29,6 +29,8 @@
 		AB9DE3712A0C36320069B30E /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9DE3702A0C36320069B30E /* LoginViewModel.swift */; };
 		AB9DE3732A0C36440069B30E /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9DE3722A0C36440069B30E /* RegisterViewModel.swift */; };
 		AB9DE3762A0C366A0069B30E /* Builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9DE3752A0C366A0069B30E /* Builders.swift */; };
+		ABA1F1D52A143027006676A1 /* CustomCellViewContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA1F1D42A143027006676A1 /* CustomCellViewContracts.swift */; };
+		ABA1F1D72A1432E9006676A1 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA1F1D62A1432E9006676A1 /* Product.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +58,8 @@
 		AB9DE3702A0C36320069B30E /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		AB9DE3722A0C36440069B30E /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		AB9DE3752A0C366A0069B30E /* Builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Builders.swift; sourceTree = "<group>"; };
+		ABA1F1D42A143027006676A1 /* CustomCellViewContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCellViewContracts.swift; sourceTree = "<group>"; };
+		ABA1F1D62A1432E9006676A1 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +78,7 @@
 			children = (
 				AB9DE36B2A0C35F30069B30E /* CustomCell.swift */,
 				AB36D0BB2A0FAC1200CE9DFC /* CustomCellViewModel.swift */,
+				ABA1F1D42A143027006676A1 /* CustomCellViewContracts.swift */,
 			);
 			path = CustomCell;
 			sourceTree = "<group>";
@@ -136,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				AB9DE3552A0C33CA0069B30E /* User.swift */,
+				ABA1F1D62A1432E9006676A1 /* Product.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -270,6 +276,7 @@
 				AB9DE3512A0C339B0069B30E /* Bindable.swift in Sources */,
 				AB9DE36F2A0C361A0069B30E /* HomeViewModel.swift in Sources */,
 				AB9DE3532A0C33AB0069B30E /* temps.swift in Sources */,
+				ABA1F1D72A1432E9006676A1 /* Product.swift in Sources */,
 				AB9DE34E2A0C33670069B30E /* UIView+ext.swift in Sources */,
 				AB9DE33D2A0C33310069B30E /* ViewController.swift in Sources */,
 				AB36D0BC2A0FAC1200CE9DFC /* CustomCellViewModel.swift in Sources */,
@@ -277,6 +284,7 @@
 				AB9DE35B2A0C340E0069B30E /* LoginViewContracts.swift in Sources */,
 				AB9DE36C2A0C35F30069B30E /* CustomCell.swift in Sources */,
 				AB9DE35F2A0C35120069B30E /* HomeViewContracts.swift in Sources */,
+				ABA1F1D52A143027006676A1 /* CustomCellViewContracts.swift in Sources */,
 				AB9DE3712A0C36320069B30E /* LoginViewModel.swift in Sources */,
 				AB9DE3392A0C33310069B30E /* AppDelegate.swift in Sources */,
 				AB9DE3622A0C35420069B30E /* HomeViewController.swift in Sources */,
