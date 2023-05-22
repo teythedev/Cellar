@@ -9,4 +9,5 @@ import Foundation
 struct Product {
     var name: String
     var amount: String
+    var unitType: UnitType
 }

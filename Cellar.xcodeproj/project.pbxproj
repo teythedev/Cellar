@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AB36D0BC2A0FAC1200CE9DFC /* CustomCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB36D0BB2A0FAC1200CE9DFC /* CustomCellViewModel.swift */; };
+		AB8E2C6E2A197278005CEA97 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8E2C6D2A197278005CEA97 /* Helpers.swift */; };
 		AB9DE3392A0C33310069B30E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9DE3382A0C33310069B30E /* AppDelegate.swift */; };
 		AB9DE33B2A0C33310069B30E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9DE33A2A0C33310069B30E /* SceneDelegate.swift */; };
 		AB9DE33D2A0C33310069B30E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9DE33C2A0C33310069B30E /* ViewController.swift */; };
@@ -35,6 +36,7 @@
 
 /* Begin PBXFileReference section */
 		AB36D0BB2A0FAC1200CE9DFC /* CustomCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCellViewModel.swift; sourceTree = "<group>"; };
+		AB8E2C6D2A197278005CEA97 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		AB9DE3352A0C33310069B30E /* Cellar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cellar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB9DE3382A0C33310069B30E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB9DE33A2A0C33310069B30E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 			children = (
 				AB9DE3502A0C339B0069B30E /* Bindable.swift */,
 				AB9DE3522A0C33AB0069B30E /* temps.swift */,
+				AB8E2C6D2A197278005CEA97 /* Helpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				AB9DE3642A0C35640069B30E /* LoginViewController.swift in Sources */,
 				AB9DE3512A0C339B0069B30E /* Bindable.swift in Sources */,
 				AB9DE36F2A0C361A0069B30E /* HomeViewModel.swift in Sources */,
+				AB8E2C6E2A197278005CEA97 /* Helpers.swift in Sources */,
 				AB9DE3532A0C33AB0069B30E /* temps.swift in Sources */,
 				ABA1F1D72A1432E9006676A1 /* Product.swift in Sources */,
 				AB9DE34E2A0C33670069B30E /* UIView+ext.swift in Sources */,

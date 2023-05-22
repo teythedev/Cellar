@@ -17,18 +17,26 @@ final class HomeViewController: UIViewController, HomeViewModelDelegate {
         }
     }
     
-    let products = [
-        Product(name: "Elma", amount: "0.5"),
-        Product(name: "Armut", amount: "10.0"),
-        Product(name: "Erik", amount: "0.25"),
-        Product(name: "Ekmek", amount: "6.0"),
-        Product(name: "Su", amount: "20"),
-        Product(name: "Muz", amount: "12"),
-        Product(name: "tuz", amount: "12"),
-        Product(name: "kuz", amount: "12"),
-        Product(name: "cuz", amount: "12"),
-        Product(name: "puz", amount: "12"),
-        Product(name: "buz", amount: "12"),
+    var products = [
+        Product(name: "Elma", amount: "0.5", unitType: UnitType.LT),
+        Product(name: "Armut", amount: "10.0",unitType: UnitType.LT),
+        Product(name: "Erik", amount: "0.25",unitType: UnitType.KG),
+        Product(name: "Ekmek", amount: "6.0",unitType: UnitType.LT),
+        Product(name: "Su", amount: "20",unitType: UnitType.LT),
+        Product(name: "Muz", amount: "12",unitType: UnitType.LT),
+        Product(name: "tuz", amount: "12",unitType: UnitType.LT),
+        Product(name: "kuz", amount: "12",unitType: UnitType.LT),
+        Product(name: "cuz", amount: "12",unitType: UnitType.LT),
+        Product(name: "puz", amount: "12",unitType: UnitType.LT),
+        Product(name: "buz", amount: "12",unitType: UnitType.LT),
+        Product(name: "Erik", amount: "0.25",unitType: UnitType.LT),
+        Product(name: "yrik", amount: "1.25",unitType: UnitType.LT),
+        Product(name: "trik", amount: "2.25",unitType: UnitType.LT),
+        Product(name: "urik", amount: "3.25",unitType: UnitType.LT),
+        Product(name: "irik", amount: "4.25",unitType: UnitType.LT),
+        Product(name: "orik", amount: "5.25",unitType: UnitType.LT),
+        Product(name: "prik", amount: "6.25",unitType: UnitType.LT),
+        Product(name: "prik", amount: "7.25",unitType: UnitType.LT),
     ]
     
     var viewModel: HomeViewModelProtocol?
@@ -38,12 +46,13 @@ final class HomeViewController: UIViewController, HomeViewModelDelegate {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(CustomCell.self, forCellReuseIdentifier: CustomCell.cellIdentifier)
+
         return tableView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         view.addSubview(cellarTableView)
         cellarTableView.delegate = self
         cellarTableView.dataSource = self
@@ -51,6 +60,7 @@ final class HomeViewController: UIViewController, HomeViewModelDelegate {
         setConstraints()
         viewModel?.delegate = self
     }
+    
     
     override func viewDidAppear(_ animated: Bool) {
         if !Temps.isLoggedIn {
@@ -74,11 +84,10 @@ final class HomeViewController: UIViewController, HomeViewModelDelegate {
     private func setConstraints() {
         NSLayoutConstraint.activate( [
             cellarTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            cellarTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            cellarTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            cellarTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            cellarTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
             cellarTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
-        
     }
 }
 
@@ -97,18 +106,53 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         80
     }
+    
+    
 }
 
 extension HomeViewController: CustomCellDelegate {
-    func proddd(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) {
-        
+    
+    
+    func showWarning(error: CustomCellError, handler: @escaping (Bool) -> Void) {
+        switch error {
+        case .NoTitle(let noTitleError):
+            let ac = UIAlertController(title: "Warning", message: noTitleError, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(ac, animated: true)
+        case .ZeroAmount(let zeroAmountError):
+            let ac = UIAlertController(title: "Warning", message: zeroAmountError, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                handler(true)
+            }))
+            ac.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { _ in
+                handler(false)
+            }))
+            self.present(ac, animated: true)
+        }
     }
     
-    func productChanged(at: CustomCell, product: Product) {
-        
+    func productDeleted(cell: CustomCell, product: Product) {
+        if let indexPath = cellarTableView.indexPath(for: cell) {
+            let product = products[indexPath.row]
+            let ac = UIAlertController(title: "Warning", message: "You are about to delete this product: \(product.name)", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            ac.addAction(UIAlertAction(title: "Ok", style: .destructive, handler: {[weak self] _ in
+                self?.products.remove(at: indexPath.row)
+                self?.cellarTableView.reloadData()
+            }))
+            present(ac, animated: true)
+            //cellarTableView.deleteRows(at: [indexPath], with: .middle)
+            
+        }
     }
     
     
+    
+    func onEditingEnd(cell: CustomCell, product: Product) {
+        if let indexpath = cellarTableView.indexPath(for: cell) {
+            products[indexpath.row] = product
+        }
+    }
 }
 
 
