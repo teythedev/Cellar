@@ -23,14 +23,25 @@ public enum CustomCellError{
 final class CustomCell: UITableViewCell {
     static let cellIdentifier = "CustomCellIdentifier"
     
+    
+    
     var product: Product? {
         didSet {
             titleTextField.text = product?.name ?? ""
             amountLabel.text = "\(product?.amount ?? "") \(product?.unitType.rawValue ?? "N/A")"
             stepper.value = Double(product?.amount ?? "0.0")!
+            stepper.stepValue = product?.unitType == .PCS ? 1 : 0.1
             segmentedControl.selectedSegmentIndex = product?.unitType.getIndexOfUnitType() ?? 0
         }
     }
+    
+    private var contanierView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemGray6
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = 10
+        return view
+    }()
     
     var delegate: CustomCellDelegate?
     
@@ -119,6 +130,7 @@ final class CustomCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.isUserInteractionEnabled = true
+
         createView()
     }
     
@@ -128,9 +140,10 @@ final class CustomCell: UITableViewCell {
     }
     
     private func createView() {
+        addSubview(contanierView)
         amountStackView.addArrangedSubview(amountLabel)
         amountStackView.addArrangedSubview(stepper)
-        addSubViews(views: amountStackView, titleTextField, saveButton,deleteButton,segmentedControl)
+        contanierView.addSubViews(views: amountStackView, titleTextField, saveButton,deleteButton,segmentedControl)
         addConstraints()
     }
     
@@ -150,29 +163,34 @@ final class CustomCell: UITableViewCell {
 extension CustomCell {
     private func addConstraints() {
         NSLayoutConstraint.activate([
-            saveButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant:  32),
-            saveButton.topAnchor.constraint(equalTo: topAnchor),
-            saveButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.05),
-            saveButton.bottomAnchor.constraint(equalTo: bottomAnchor),
+            contanierView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            contanierView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            contanierView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+            contanierView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            
+            saveButton.leadingAnchor.constraint(equalTo: contanierView.leadingAnchor, constant:  32),
+            saveButton.topAnchor.constraint(equalTo: contanierView.topAnchor),
+            saveButton.widthAnchor.constraint(equalTo: contanierView.widthAnchor, multiplier: 0.05),
+            saveButton.bottomAnchor.constraint(equalTo: contanierView.bottomAnchor),
             
             titleTextField.leadingAnchor.constraint(equalTo: saveButton.trailingAnchor, constant: 26),
-            titleTextField.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.45),
-            titleTextField.topAnchor.constraint(equalTo: topAnchor),
+            titleTextField.widthAnchor.constraint(equalTo: contanierView.widthAnchor, multiplier: 0.45),
+            titleTextField.topAnchor.constraint(equalTo: contanierView.topAnchor),
             
             segmentedControl.heightAnchor.constraint(equalToConstant: 16),
-            segmentedControl.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.30),
+            segmentedControl.widthAnchor.constraint(equalTo: contanierView.widthAnchor, multiplier: 0.30),
             segmentedControl.topAnchor.constraint(equalTo: titleTextField.bottomAnchor),
-            segmentedControl.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -6),
+            segmentedControl.bottomAnchor.constraint(equalTo: contanierView.bottomAnchor, constant: -6),
             segmentedControl.leadingAnchor.constraint(equalTo: saveButton.trailingAnchor, constant: 26),
             
             amountStackView.trailingAnchor.constraint(equalTo: deleteButton.leadingAnchor, constant: -24),
-            amountStackView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.20),
-            amountStackView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-            amountStackView.bottomAnchor.constraint(equalTo: bottomAnchor,constant: -8),
+            amountStackView.widthAnchor.constraint(equalTo: contanierView.widthAnchor, multiplier: 0.20),
+            amountStackView.topAnchor.constraint(equalTo: contanierView.topAnchor, constant: 8),
+            amountStackView.bottomAnchor.constraint(equalTo: contanierView.bottomAnchor,constant: -8),
             
-            deleteButton.topAnchor.constraint(equalTo: topAnchor),
-            deleteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant:  -16),
-            deleteButton.bottomAnchor.constraint(equalTo: bottomAnchor)
+            deleteButton.topAnchor.constraint(equalTo: contanierView.topAnchor),
+            deleteButton.trailingAnchor.constraint(equalTo: contanierView.trailingAnchor, constant:  -16),
+            deleteButton.bottomAnchor.constraint(equalTo: contanierView.bottomAnchor)
         ])
     }
 }
@@ -184,8 +202,8 @@ extension CustomCell {
         if(!isInEditingMode) {
             if let text = titleTextField.text, text.isEmpty {
                 
-                delegate?.showWarning(error: .NoTitle("Please delete product or enter title!"), handler: { result in
-                    print(result)
+                delegate?.showWarning(error: .NoTitle("Please delete product or enter product name!"), handler: { result in
+                    
                 })
                 titleTextField.becomeFirstResponder()
                 isInEditingMode = !isInEditingMode
@@ -220,8 +238,8 @@ extension CustomCell {
             titleTextField.text = title
             product?.name = title
         } else {
-            delegate?.showWarning(error: .NoTitle("dsadsada"), handler: { resutl in
-                print("sdsds")
+            delegate?.showWarning(error: .NoTitle("Please enter product name, unless you will be delete it"), handler: { result in
+                print(self.product?.name)
             })
         }
     }
@@ -236,6 +254,12 @@ extension CustomCell {
         let selectedIndex = sender.selectedSegmentIndex
         guard let selectedUnitTypeString = sender.titleForSegment(at: selectedIndex) else {return}
         product?.unitType = UnitType(rawValue: selectedUnitTypeString)!
+        switch product?.unitType {
+        case .PCS:
+            stepper.stepValue = 1.0
+        default:
+            stepper.stepValue = 0.1
+        }
     }
 }
 

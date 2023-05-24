@@ -7,6 +7,33 @@
 
 import Foundation
 final class HomeViewModel: HomeViewModelProtocol {
+    func updateProduct(index: Int, product: Product, completion: @escaping ((Result<Bool, Error>) -> ())) {
+        //TODO: Service.updateProduct
+        if var products = products {
+            products[index] = product
+            completion(.success(true))
+        }
+
+    }
+    
+    
+    func deleteProduct(index: Int) {
+        delegate?.handleViewModelOutput(.showLoading(true, "Product Deleting"))
+        products?.remove(at: index)
+        delegate?.handleViewModelOutput(.showLoading(false, ""))
+    }
+    
+    func fetchOwnedProducts(completion: @escaping (Result<String, Error>) -> ()) {
+        delegate?.handleViewModelOutput(.showLoading(true, "Products Loading"))
+        //TODO: Service.fetchProduct Method here
+        products = Temps.products
+        //Method end
+        completion(.success("Success"))
+        delegate?.handleViewModelOutput(.showLoading(false,""))
+    }
+    
+    var products: [Product]?
+    
     func fetchCurrentUser(completion: @escaping (User?) -> ()) {
         if isUserLoggedIn {
             print("Current User is: Bla")
@@ -23,6 +50,8 @@ final class HomeViewModel: HomeViewModelProtocol {
     
     private var isUserLoggedIn = false
     
+    
+ 
 
     
 }

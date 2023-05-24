@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import ProgressHUD
 
 
 final class HomeViewController: UIViewController, HomeViewModelDelegate {
@@ -14,30 +14,16 @@ final class HomeViewController: UIViewController, HomeViewModelDelegate {
         switch output {
         case .gotoLoginPage(let viewController):
             present(viewController, animated: true)
+        case .showLoading(let result, let message):
+            if result {
+                ProgressHUD.show(message)
+            }else {
+                ProgressHUD.dismiss()
+            }
         }
+
     }
-    
-    var products = [
-        Product(name: "Elma", amount: "0.5", unitType: UnitType.LT),
-        Product(name: "Armut", amount: "10.0",unitType: UnitType.LT),
-        Product(name: "Erik", amount: "0.25",unitType: UnitType.KG),
-        Product(name: "Ekmek", amount: "6.0",unitType: UnitType.LT),
-        Product(name: "Su", amount: "20",unitType: UnitType.LT),
-        Product(name: "Muz", amount: "12",unitType: UnitType.LT),
-        Product(name: "tuz", amount: "12",unitType: UnitType.LT),
-        Product(name: "kuz", amount: "12",unitType: UnitType.LT),
-        Product(name: "cuz", amount: "12",unitType: UnitType.LT),
-        Product(name: "puz", amount: "12",unitType: UnitType.LT),
-        Product(name: "buz", amount: "12",unitType: UnitType.LT),
-        Product(name: "Erik", amount: "0.25",unitType: UnitType.LT),
-        Product(name: "yrik", amount: "1.25",unitType: UnitType.LT),
-        Product(name: "trik", amount: "2.25",unitType: UnitType.LT),
-        Product(name: "urik", amount: "3.25",unitType: UnitType.LT),
-        Product(name: "irik", amount: "4.25",unitType: UnitType.LT),
-        Product(name: "orik", amount: "5.25",unitType: UnitType.LT),
-        Product(name: "prik", amount: "6.25",unitType: UnitType.LT),
-        Product(name: "prik", amount: "7.25",unitType: UnitType.LT),
-    ]
+
     
     var viewModel: HomeViewModelProtocol?
     
@@ -46,7 +32,7 @@ final class HomeViewController: UIViewController, HomeViewModelDelegate {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(CustomCell.self, forCellReuseIdentifier: CustomCell.cellIdentifier)
-
+        tableView.separatorStyle = .none
         return tableView
     }()
     
@@ -59,6 +45,7 @@ final class HomeViewController: UIViewController, HomeViewModelDelegate {
         cellarTableView.estimatedRowHeight = 80
         setConstraints()
         viewModel?.delegate = self
+       
     }
     
     
@@ -77,6 +64,16 @@ final class HomeViewController: UIViewController, HomeViewModelDelegate {
             })
         }else {
             print("Fetch cellar")
+            viewModel?.fetchOwnedProducts(completion: { [weak self] result in
+                switch result {
+                case .success(let success):
+                    ProgressHUD.showSucceed()
+                    self?.cellarTableView.reloadData()
+                case .failure(let failure):
+                    ProgressHUD.showError("error")
+                    
+                }
+            })
         }
         
     }
@@ -84,8 +81,8 @@ final class HomeViewController: UIViewController, HomeViewModelDelegate {
     private func setConstraints() {
         NSLayoutConstraint.activate( [
             cellarTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            cellarTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            cellarTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            cellarTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            cellarTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             cellarTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
@@ -93,18 +90,18 @@ final class HomeViewController: UIViewController, HomeViewModelDelegate {
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        products.count
+        viewModel?.products?.count ?? 0
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = cellarTableView.dequeueReusableCell(withIdentifier: CustomCell.cellIdentifier, for: indexPath) as! CustomCell
-        let item = products[indexPath.row]
+        let item = viewModel?.products?[indexPath.row]
         cell.product = item
         cell.selectionStyle = .none
         cell.delegate = self
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        80
+        100
     }
     
     
@@ -117,7 +114,9 @@ extension HomeViewController: CustomCellDelegate {
         switch error {
         case .NoTitle(let noTitleError):
             let ac = UIAlertController(title: "Warning", message: noTitleError, preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                handler(true)
+            }))
             self.present(ac, animated: true)
         case .ZeroAmount(let zeroAmountError):
             let ac = UIAlertController(title: "Warning", message: zeroAmountError, preferredStyle: .alert)
@@ -133,16 +132,15 @@ extension HomeViewController: CustomCellDelegate {
     
     func productDeleted(cell: CustomCell, product: Product) {
         if let indexPath = cellarTableView.indexPath(for: cell) {
-            let product = products[indexPath.row]
+            let product = viewModel?.products?[indexPath.row]
+            guard let product = product else {return}
             let ac = UIAlertController(title: "Warning", message: "You are about to delete this product: \(product.name)", preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
             ac.addAction(UIAlertAction(title: "Ok", style: .destructive, handler: {[weak self] _ in
-                self?.products.remove(at: indexPath.row)
+                self?.viewModel?.deleteProduct(index: indexPath.row)
                 self?.cellarTableView.reloadData()
             }))
             present(ac, animated: true)
-            //cellarTableView.deleteRows(at: [indexPath], with: .middle)
-            
         }
     }
     
@@ -150,7 +148,17 @@ extension HomeViewController: CustomCellDelegate {
     
     func onEditingEnd(cell: CustomCell, product: Product) {
         if let indexpath = cellarTableView.indexPath(for: cell) {
-            products[indexpath.row] = product
+            viewModel?.updateProduct(index: indexpath.row, product: product, completion: { [weak self] result in
+                switch result {
+                case .success(_):
+                    //TODO: This is not working!!!!!
+                    print("dsds")
+                  self?.cellarTableView.reloadData()
+                case .failure(_):
+                    print("Update fail")
+                }
+            })
+            
         }
     }
 }
