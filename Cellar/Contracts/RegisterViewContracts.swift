@@ -14,12 +14,15 @@ protocol RegisterViewModelDelegate: AnyObject {
 }
 
 enum RegisterViewModelOutput {
-    case userRegistered(Bool)
+    case showLoading(Bool,String)
+    case userRegistered(Bool,String)
 }
 
 
 protocol RegisteViewModelProtocol {
     var delegate: RegisterViewModelDelegate? { get set }
+    
+    var authService: AuthServiceProtocol? { get set }
     
     var isFormValid: Bindable<Bool> { get set }
     

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ProgressHUD
 class LoginViewController: UIViewController, LoginViewModelDelegate {
     
     private let gradientLayer: CAGradientLayer = {
@@ -104,18 +105,24 @@ class LoginViewController: UIViewController, LoginViewModelDelegate {
     
     func handleViewModelOutput(_ output: LoginViewModelOutput) {
         switch output {
-        case .userLoggedIn(let result):
-            dismiss(animated: true)
+        case .userLoggedIn(let result, let message):
+            if result {
+                self.setupRootViewController(viewController: HomeViewController.make())
+            } else {
+                ProgressHUD.showError(message)
+            }
+           
+        case .showLoading(let show,let message):
+            if show {
+                ProgressHUD.show(message)
+            }else {
+                ProgressHUD.dismiss()
+            }
         }
     }
     
     @objc fileprivate func handleGoToRegister() {
-        let registerController = RegisterViewController()
-        let registerViewModel = RegisterViewModel()
-        registerController.viewModel = registerViewModel
-        registerViewModel.delegate = registerController
-    
-        navigationController?.pushViewController(registerController, animated: true)
+        navigationController?.pushViewController(RegisterViewController.make(), animated: true)
     }
     
     @objc private func handleDismissKeyboard() {
@@ -151,7 +158,9 @@ class LoginViewController: UIViewController, LoginViewModelDelegate {
             stackView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 10),
             stackView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor,constant:  -10),
             goToRegister.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            goToRegister.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            //goToRegister.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            goToRegister.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            goToRegister.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)
         ])
     }
 }

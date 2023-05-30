@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FirebaseCore
+import FirebaseAuth
 import ProgressHUD
 
 
@@ -27,6 +29,8 @@ final class HomeViewController: UIViewController, HomeViewModelDelegate {
     
     var viewModel: HomeViewModelProtocol?
     
+    var authHandle: AuthStateDidChangeListenerHandle?
+    
     
     let cellarTableView : UITableView = {
         let tableView = UITableView()
@@ -45,37 +49,32 @@ final class HomeViewController: UIViewController, HomeViewModelDelegate {
         cellarTableView.estimatedRowHeight = 80
         setConstraints()
         viewModel?.delegate = self
-       
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .done, target: self, action: #selector(signOut))
     }
     
+    @objc func signOut() throws {
+        try Auth.auth().signOut()
+    }
     
-    override func viewDidAppear(_ animated: Bool) {
-        if !Temps.isLoggedIn {
-            viewModel?.fetchCurrentUser(completion: {[weak self] user in
-                if let user = user {
-                    print("\(user.name)")
-                } else {
-                    let lgn = LoginViewController()
-                    let navController = UINavigationController(rootViewController: lgn)
-                    lgn.viewModel = LoginViewModel()
-                    navController.modalPresentationStyle = .fullScreen
-                    self?.present(navController, animated: true)
-                }
-            })
-        }else {
-            print("Fetch cellar")
-            viewModel?.fetchOwnedProducts(completion: { [weak self] result in
-                switch result {
-                case .success(let success):
-                    ProgressHUD.showSucceed()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        authHandle = Auth.auth().addStateDidChangeListener({[weak self] auth, user in
+            if user == nil {
+                self?.setupRootViewController(viewController: LoginViewController.make())
+            }else {
+                self?.viewModel?.fetchOwnedProducts(completion: { result in
+                    print("ds")
                     self?.cellarTableView.reloadData()
-                case .failure(let failure):
-                    ProgressHUD.showError("error")
-                    
-                }
-            })
+                })
+            }
+        })
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        if let authHandle = authHandle {
+            Auth.auth().removeStateDidChangeListener(authHandle)
         }
-        
+       
     }
     
     private func setConstraints() {
@@ -103,8 +102,36 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         100
     }
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        
+        let action = UIContextualAction(style: .destructive, title: "Delete") {[ weak self ] action, view, completionHandler in
+            guard let viewModel = self?.viewModel, let products = viewModel.products else {return}
+            let ac = UIAlertController(title: "Warning!", message: "You are about to deleting \(products [indexPath.row].name)", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+                completionHandler(false)
+            }))
+            ac.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+                self?.handleMoveToTrash(indexPath: indexPath)
+                completionHandler(true)
+            }))
+            self?.present(ac, animated: true)
+            
+        }
+        
+        action.image = UIImage(systemName: "trash")
+        
+        return UISwipeActionsConfiguration(actions: [action])
+    }
     
-    
+}
+
+extension HomeViewController {
+    private func handleMoveToTrash(indexPath: IndexPath) {
+        guard let viewModel = viewModel else {return}
+        viewModel.deleteProduct(index: indexPath.row)
+        cellarTableView.reloadData()
+    }
 }
 
 extension HomeViewController: CustomCellDelegate {

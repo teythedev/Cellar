@@ -9,10 +9,10 @@ import Foundation
 final class HomeViewModel: HomeViewModelProtocol {
     func updateProduct(index: Int, product: Product, completion: @escaping ((Result<Bool, Error>) -> ())) {
         //TODO: Service.updateProduct
-        if var products = products {
-            products[index] = product
-            completion(.success(true))
-        }
+        guard var products = products else {return}
+        products[index] = product
+        completion(.success(true))
+
 
     }
     

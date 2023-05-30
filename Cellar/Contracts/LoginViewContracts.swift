@@ -9,15 +9,19 @@ import Foundation
 
 protocol LoginViewModelDelegate: AnyObject {
     func handleViewModelOutput(_ output: LoginViewModelOutput)
+    
 }
 
 enum LoginViewModelOutput {
-    case userLoggedIn(Bool)
+    case userLoggedIn(Bool,String?)
+    case showLoading(Bool,String)
 }
 
 
 protocol LoginViewModelProtocol {
     var delegate: LoginViewModelDelegate? { get set }
+    
+    var authService: AuthServiceProtocol? { get set }
     
     var isFormValid: Bindable<Bool> { get set }
     

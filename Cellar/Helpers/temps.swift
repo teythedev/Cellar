@@ -8,7 +8,7 @@
 import Foundation
 
 class Temps {
-    static var isLoggedIn: Bool = true
+    static var isLoggedIn: Bool = false
     
     static var products = [
         Product(name: "Elma", amount: "0.5", unitType: UnitType.PCS),

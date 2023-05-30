@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ProgressHUD
 
 class RegisterViewController: UIViewController, RegisterViewModelDelegate {
     
@@ -188,8 +189,19 @@ class RegisterViewController: UIViewController, RegisterViewModelDelegate {
     
     func handleViewModelOutput(_ output: RegisterViewModelOutput) {
         switch output {
-        case .userRegistered(let result):
-            dismiss(animated: true)
+        case .userRegistered(let result, let message):
+            if result {
+                self.setupRootViewController(viewController: HomeViewController.make())
+            }else {
+                ProgressHUD.showError(message)
+            }
+            
+        case .showLoading(let show, let message):
+            if show {
+                ProgressHUD.show(message)
+            } else {
+                ProgressHUD.dismiss()
+            }
         }
     }
     

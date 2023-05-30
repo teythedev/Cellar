@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		AB36D0BC2A0FAC1200CE9DFC /* CustomCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB36D0BB2A0FAC1200CE9DFC /* CustomCellViewModel.swift */; };
+		AB87BECE2A23CFDA00BFC215 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = AB87BECD2A23CFDA00BFC215 /* FirebaseAuth */; };
+		AB87BED02A23D38500BFC215 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AB87BECF2A23D38500BFC215 /* GoogleService-Info.plist */; };
+		AB87BED22A23DEF900BFC215 /* UIViewController+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB87BED12A23DEF900BFC215 /* UIViewController+ext.swift */; };
+		AB87BED52A23F64600BFC215 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB87BED42A23F64600BFC215 /* AuthService.swift */; };
 		AB8E2C6E2A197278005CEA97 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8E2C6D2A197278005CEA97 /* Helpers.swift */; };
 		AB9DE3392A0C33310069B30E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9DE3382A0C33310069B30E /* AppDelegate.swift */; };
 		AB9DE33B2A0C33310069B30E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9DE33A2A0C33310069B30E /* SceneDelegate.swift */; };
@@ -37,6 +41,9 @@
 
 /* Begin PBXFileReference section */
 		AB36D0BB2A0FAC1200CE9DFC /* CustomCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCellViewModel.swift; sourceTree = "<group>"; };
+		AB87BECF2A23D38500BFC215 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AB87BED12A23DEF900BFC215 /* UIViewController+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ext.swift"; sourceTree = "<group>"; };
+		AB87BED42A23F64600BFC215 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		AB8E2C6D2A197278005CEA97 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		AB9DE3352A0C33310069B30E /* Cellar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cellar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB9DE3382A0C33310069B30E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -71,6 +78,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABB467C02A1D4E57007EB44B /* ProgressHUD in Frameworks */,
+				AB87BECE2A23CFDA00BFC215 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +93,14 @@
 				ABA1F1D42A143027006676A1 /* CustomCellViewContracts.swift */,
 			);
 			path = CustomCell;
+			sourceTree = "<group>";
+		};
+		AB87BED32A23F63800BFC215 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				AB87BED42A23F64600BFC215 /* AuthService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		AB9DE32C2A0C33310069B30E = {
@@ -106,6 +122,7 @@
 		AB9DE3372A0C33310069B30E /* Cellar */ = {
 			isa = PBXGroup;
 			children = (
+				AB87BED32A23F63800BFC215 /* Services */,
 				AB9DE3742A0C36580069B30E /* Builders */,
 				AB9DE36D2A0C36090069B30E /* ViewModels */,
 				AB9DE3672A0C35A10069B30E /* Views */,
@@ -119,6 +136,7 @@
 				AB9DE33C2A0C33310069B30E /* ViewController.swift */,
 				AB9DE3412A0C33320069B30E /* Assets.xcassets */,
 				AB9DE3432A0C33320069B30E /* LaunchScreen.storyboard */,
+				AB87BECF2A23D38500BFC215 /* GoogleService-Info.plist */,
 				AB9DE3462A0C33320069B30E /* Info.plist */,
 			);
 			path = Cellar;
@@ -128,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				AB9DE34D2A0C33670069B30E /* UIView+ext.swift */,
+				AB87BED12A23DEF900BFC215 /* UIViewController+ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -224,6 +243,7 @@
 			name = Cellar;
 			packageProductDependencies = (
 				ABB467BF2A1D4E57007EB44B /* ProgressHUD */,
+				AB87BECD2A23CFDA00BFC215 /* FirebaseAuth */,
 			);
 			productName = Cellar;
 			productReference = AB9DE3352A0C33310069B30E /* Cellar.app */;
@@ -255,6 +275,7 @@
 			mainGroup = AB9DE32C2A0C33310069B30E;
 			packageReferences = (
 				ABB467BE2A1D4E57007EB44B /* XCRemoteSwiftPackageReference "ProgressHUD" */,
+				AB87BECC2A23CFDA00BFC215 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = AB9DE3362A0C33310069B30E /* Products */;
 			projectDirPath = "";
@@ -272,6 +293,7 @@
 			files = (
 				AB9DE3452A0C33320069B30E /* LaunchScreen.storyboard in Resources */,
 				AB9DE3422A0C33320069B30E /* Assets.xcassets in Resources */,
+				AB87BED02A23D38500BFC215 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,6 +310,8 @@
 				AB9DE36F2A0C361A0069B30E /* HomeViewModel.swift in Sources */,
 				AB8E2C6E2A197278005CEA97 /* Helpers.swift in Sources */,
 				AB9DE3532A0C33AB0069B30E /* temps.swift in Sources */,
+				AB87BED22A23DEF900BFC215 /* UIViewController+ext.swift in Sources */,
+				AB87BED52A23F64600BFC215 /* AuthService.swift in Sources */,
 				ABA1F1D72A1432E9006676A1 /* Product.swift in Sources */,
 				AB9DE34E2A0C33670069B30E /* UIView+ext.swift in Sources */,
 				AB9DE33D2A0C33310069B30E /* ViewController.swift in Sources */,
@@ -514,6 +538,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		AB87BECC2A23CFDA00BFC215 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
 		ABB467BE2A1D4E57007EB44B /* XCRemoteSwiftPackageReference "ProgressHUD" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/relatedcode/ProgressHUD.git";
@@ -525,6 +557,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		AB87BECD2A23CFDA00BFC215 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AB87BECC2A23CFDA00BFC215 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
 		ABB467BF2A1D4E57007EB44B /* ProgressHUD */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = ABB467BE2A1D4E57007EB44B /* XCRemoteSwiftPackageReference "ProgressHUD" */;

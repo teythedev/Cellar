@@ -62,7 +62,6 @@ final class CustomCell: UITableViewCell {
         let texfield = UITextField()
         texfield.placeholder = "Enter product name"
         texfield.translatesAutoresizingMaskIntoConstraints = false
-        
         texfield.isUserInteractionEnabled = false
         texfield.addTarget(self, action: #selector(titleTextChanged), for: .editingChanged)
         texfield.clearButtonMode = .whileEditing
