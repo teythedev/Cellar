@@ -12,6 +12,8 @@ final class RegisterViewModel: RegisteViewModelProtocol {
     
     var authService: AuthServiceProtocol?
     
+    var databaseService: FirebaseDataBaseService?
+    
     var isFormValid: Bindable<Bool> = Bindable<Bool>()
     
     var email: String? {
@@ -51,9 +53,17 @@ final class RegisterViewModel: RegisteViewModelProtocol {
             guard let strongSelf = self else {return}
             switch result {
             case .success(let user):
-                let user = user as? User
-                strongSelf.delegate?.handleViewModelOutput(.showLoading(false, ""))
-                strongSelf.delegate?.handleViewModelOutput(.userRegistered(true, ""))
+                guard let userId = user?.id else {return}
+                self?.databaseService?.addDocument(collectionPath: Collections.users, data: CellarUser(id: userId, name: self?.name, cellarsIDs: nil, userEmail: email, lastUpdate: Date.now),completion: { result in
+                    switch result {
+                    case .success(let success):
+                        strongSelf.delegate?.handleViewModelOutput(.showLoading(false, ""))
+                        strongSelf.delegate?.handleViewModelOutput(.userRegistered(true, ""))
+                    case .failure(let failure):
+                        strongSelf.delegate?.handleViewModelOutput(.userRegistered(false, failure.localizedDescription))
+                    }
+                })
+
             case .failure(let failure):
                 strongSelf.delegate?.handleViewModelOutput(.userRegistered(false, failure.localizedDescription))
             }

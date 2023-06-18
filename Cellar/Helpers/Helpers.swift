@@ -12,7 +12,7 @@ final class Colors {
     static let greenColor : UIColor = #colorLiteral(red: 0, green: 0.4823529412, blue: 0.1725490196, alpha: 1)
 }
 
-enum UnitType: String, CaseIterable {
+enum UnitType: String, CaseIterable , Codable{
     case KG, LT, PCS
     
     func getIndexOfUnitType()-> Int {

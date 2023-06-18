@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB290C0B2A3F964300063D8E /* AddProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB290C0A2A3F964300063D8E /* AddProductViewController.swift */; };
+		AB290C0D2A3FAE2100063D8E /* CellarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB290C0C2A3FAE2100063D8E /* CellarService.swift */; };
 		AB36D0BC2A0FAC1200CE9DFC /* CustomCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB36D0BB2A0FAC1200CE9DFC /* CustomCellViewModel.swift */; };
+		AB6B3F062A28523A00C977C3 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = AB6B3F052A28523A00C977C3 /* FirebaseFirestore */; };
+		AB6B3F082A28524200C977C3 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AB6B3F072A28524200C977C3 /* FirebaseFirestoreSwift */; };
+		AB6B3F0A2A28528000C977C3 /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6B3F092A28528000C977C3 /* DatabaseService.swift */; };
 		AB87BECE2A23CFDA00BFC215 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = AB87BECD2A23CFDA00BFC215 /* FirebaseAuth */; };
 		AB87BED02A23D38500BFC215 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AB87BECF2A23D38500BFC215 /* GoogleService-Info.plist */; };
 		AB87BED22A23DEF900BFC215 /* UIViewController+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB87BED12A23DEF900BFC215 /* UIViewController+ext.swift */; };
@@ -37,10 +42,14 @@
 		ABA1F1D52A143027006676A1 /* CustomCellViewContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA1F1D42A143027006676A1 /* CustomCellViewContracts.swift */; };
 		ABA1F1D72A1432E9006676A1 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA1F1D62A1432E9006676A1 /* Product.swift */; };
 		ABB467C02A1D4E57007EB44B /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = ABB467BF2A1D4E57007EB44B /* ProgressHUD */; };
+		ABF812792A31134D00AC50B5 /* Cellar.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF812782A31134D00AC50B5 /* Cellar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AB290C0A2A3F964300063D8E /* AddProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductViewController.swift; sourceTree = "<group>"; };
+		AB290C0C2A3FAE2100063D8E /* CellarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellarService.swift; sourceTree = "<group>"; };
 		AB36D0BB2A0FAC1200CE9DFC /* CustomCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCellViewModel.swift; sourceTree = "<group>"; };
+		AB6B3F092A28528000C977C3 /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
 		AB87BECF2A23D38500BFC215 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AB87BED12A23DEF900BFC215 /* UIViewController+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ext.swift"; sourceTree = "<group>"; };
 		AB87BED42A23F64600BFC215 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
@@ -70,6 +79,7 @@
 		AB9DE3752A0C366A0069B30E /* Builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Builders.swift; sourceTree = "<group>"; };
 		ABA1F1D42A143027006676A1 /* CustomCellViewContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCellViewContracts.swift; sourceTree = "<group>"; };
 		ABA1F1D62A1432E9006676A1 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		ABF812782A31134D00AC50B5 /* Cellar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cellar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +89,8 @@
 			files = (
 				ABB467C02A1D4E57007EB44B /* ProgressHUD in Frameworks */,
 				AB87BECE2A23CFDA00BFC215 /* FirebaseAuth in Frameworks */,
+				AB6B3F062A28523A00C977C3 /* FirebaseFirestore in Frameworks */,
+				AB6B3F082A28524200C977C3 /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,10 +107,19 @@
 			path = CustomCell;
 			sourceTree = "<group>";
 		};
+		AB6B3F042A28523A00C977C3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		AB87BED32A23F63800BFC215 /* Services */ = {
 			isa = PBXGroup;
 			children = (
 				AB87BED42A23F64600BFC215 /* AuthService.swift */,
+				AB6B3F092A28528000C977C3 /* DatabaseService.swift */,
+				AB290C0C2A3FAE2100063D8E /* CellarService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -108,6 +129,7 @@
 			children = (
 				AB9DE3372A0C33310069B30E /* Cellar */,
 				AB9DE3362A0C33310069B30E /* Products */,
+				AB6B3F042A28523A00C977C3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -166,6 +188,7 @@
 			children = (
 				AB9DE3552A0C33CA0069B30E /* User.swift */,
 				ABA1F1D62A1432E9006676A1 /* Product.swift */,
+				ABF812782A31134D00AC50B5 /* Cellar.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -186,6 +209,7 @@
 				AB9DE3612A0C35420069B30E /* HomeViewController.swift */,
 				AB9DE3632A0C35640069B30E /* LoginViewController.swift */,
 				AB9DE3652A0C35910069B30E /* RegisterViewController.swift */,
+				AB290C0A2A3F964300063D8E /* AddProductViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -244,6 +268,8 @@
 			packageProductDependencies = (
 				ABB467BF2A1D4E57007EB44B /* ProgressHUD */,
 				AB87BECD2A23CFDA00BFC215 /* FirebaseAuth */,
+				AB6B3F052A28523A00C977C3 /* FirebaseFirestore */,
+				AB6B3F072A28524200C977C3 /* FirebaseFirestoreSwift */,
 			);
 			productName = Cellar;
 			productReference = AB9DE3352A0C33310069B30E /* Cellar.app */;
@@ -306,12 +332,14 @@
 			files = (
 				AB9DE36A2A0C35CD0069B30E /* CustomTextField.swift in Sources */,
 				AB9DE3642A0C35640069B30E /* LoginViewController.swift in Sources */,
+				ABF812792A31134D00AC50B5 /* Cellar.swift in Sources */,
 				AB9DE3512A0C339B0069B30E /* Bindable.swift in Sources */,
 				AB9DE36F2A0C361A0069B30E /* HomeViewModel.swift in Sources */,
 				AB8E2C6E2A197278005CEA97 /* Helpers.swift in Sources */,
 				AB9DE3532A0C33AB0069B30E /* temps.swift in Sources */,
 				AB87BED22A23DEF900BFC215 /* UIViewController+ext.swift in Sources */,
 				AB87BED52A23F64600BFC215 /* AuthService.swift in Sources */,
+				AB290C0D2A3FAE2100063D8E /* CellarService.swift in Sources */,
 				ABA1F1D72A1432E9006676A1 /* Product.swift in Sources */,
 				AB9DE34E2A0C33670069B30E /* UIView+ext.swift in Sources */,
 				AB9DE33D2A0C33310069B30E /* ViewController.swift in Sources */,
@@ -319,6 +347,7 @@
 				AB9DE3732A0C36440069B30E /* RegisterViewModel.swift in Sources */,
 				AB9DE35B2A0C340E0069B30E /* LoginViewContracts.swift in Sources */,
 				AB9DE36C2A0C35F30069B30E /* CustomCell.swift in Sources */,
+				AB290C0B2A3F964300063D8E /* AddProductViewController.swift in Sources */,
 				AB9DE35F2A0C35120069B30E /* HomeViewContracts.swift in Sources */,
 				ABA1F1D52A143027006676A1 /* CustomCellViewContracts.swift in Sources */,
 				AB9DE3712A0C36320069B30E /* LoginViewModel.swift in Sources */,
@@ -326,6 +355,7 @@
 				AB9DE3622A0C35420069B30E /* HomeViewController.swift in Sources */,
 				AB9DE3762A0C366A0069B30E /* Builders.swift in Sources */,
 				AB9DE33B2A0C33310069B30E /* SceneDelegate.swift in Sources */,
+				AB6B3F0A2A28528000C977C3 /* DatabaseService.swift in Sources */,
 				AB9DE3662A0C35910069B30E /* RegisterViewController.swift in Sources */,
 				AB9DE3562A0C33CA0069B30E /* User.swift in Sources */,
 				AB9DE35D2A0C34290069B30E /* RegisterViewContracts.swift in Sources */,
@@ -557,6 +587,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		AB6B3F052A28523A00C977C3 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AB87BECC2A23CFDA00BFC215 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		AB6B3F072A28524200C977C3 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AB87BECC2A23CFDA00BFC215 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
 		AB87BECD2A23CFDA00BFC215 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AB87BECC2A23CFDA00BFC215 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

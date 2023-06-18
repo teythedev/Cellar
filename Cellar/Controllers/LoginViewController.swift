@@ -158,7 +158,6 @@ class LoginViewController: UIViewController, LoginViewModelDelegate {
             stackView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 10),
             stackView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor,constant:  -10),
             goToRegister.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            //goToRegister.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             goToRegister.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             goToRegister.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)
         ])

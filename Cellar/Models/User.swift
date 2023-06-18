@@ -6,6 +6,19 @@
 //
 
 import Foundation
-struct User {
-    let name: String
+class CellarUser: DatabaseObject{
+    let id: String
+    let name: String?
+    let cellarsIDs: [String]?
+    let userEmail: String?
+    var lastUpdated: Date
+    
+    init(id: String, name: String?, cellarsIDs: [String]?, userEmail: String?, lastUpdate: Date) {
+        self.id = id
+        self.name = name
+        self.cellarsIDs = cellarsIDs
+        self.userEmail = userEmail
+        self.lastUpdated = lastUpdate
+    }
 }
+

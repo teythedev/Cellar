@@ -39,7 +39,8 @@ final class LoginViewModel: LoginViewModelProtocol {
             guard let strongSelf = self else {return}
             switch result {
             case .success(let user):
-                let user = user as? User
+                let defaults = UserDefaults.standard
+                defaults.setValue(user?.id, forKey: "currentUserID")
                 strongSelf.delegate?.handleViewModelOutput(.showLoading(false, ""))
                 strongSelf.delegate?.handleViewModelOutput(.userLoggedIn(true,""))
             case .failure(let failure):

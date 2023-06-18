@@ -27,7 +27,7 @@ final class CustomTextField: UITextField {
         layer.cornerRadius = height / 2
         layer.borderWidth = 2
         layer.borderColor = UIColor.white.cgColor
-        isSecureTextEntry = isSecure
+        //isSecureTextEntry = isSecure
     }
     
     override func didMoveToSuperview() {

@@ -9,8 +9,12 @@ import UIKit
 extension HomeViewController {
     static func make() -> UIViewController {
         let homeViewController = HomeViewController()
+        let authListener = FireBaseAuthListerner()
+        let databaseService = FirebaseDataBaseService()
         let navigationController = UINavigationController(rootViewController: homeViewController)
         homeViewController.viewModel = HomeViewModel()
+        homeViewController.viewModel?.databaseService = databaseService
+        homeViewController.viewModel?.authListener = authListener
         return navigationController
     }
 }
@@ -32,7 +36,9 @@ extension RegisterViewController {
     static func make() -> UIViewController {
         let register = RegisterViewController()
         let authService = FirebaseAuthService()
+        let firebaseDatabaseService = FirebaseDataBaseService()
         register.viewModel = RegisterViewModel()
+        register.viewModel?.databaseService = firebaseDatabaseService
         register.viewModel?.authService = authService
         return register
     }

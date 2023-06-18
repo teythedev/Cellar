@@ -14,22 +14,24 @@ import ProgressHUD
 final class HomeViewController: UIViewController, HomeViewModelDelegate {
     func handleViewModelOutput(_ output: HomeViewModelOutput) {
         switch output {
-        case .gotoLoginPage(let viewController):
-            present(viewController, animated: true)
         case .showLoading(let result, let message):
             if result {
                 ProgressHUD.show(message)
             }else {
                 ProgressHUD.dismiss()
             }
+        case .showAddProductModal:
+            let addProductViewController = AddProductViewController()
+            present(addProductViewController, animated: true) {
+                
+            }
         }
-
+        
     }
-
+    
     
     var viewModel: HomeViewModelProtocol?
     
-    var authHandle: AuthStateDidChangeListenerHandle?
     
     
     let cellarTableView : UITableView = {
@@ -49,7 +51,12 @@ final class HomeViewController: UIViewController, HomeViewModelDelegate {
         cellarTableView.estimatedRowHeight = 80
         setConstraints()
         viewModel?.delegate = self
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .done, target: self, action: #selector(signOut))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "bag.badge.plus"), style: .done, target: self, action: #selector(goToAddProductPage))
+       // navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .done, target: self, action: #selector(signOut))
+    }
+    
+    @objc func showAddProductModal() {
+        
     }
     
     @objc func signOut() throws {
@@ -58,7 +65,7 @@ final class HomeViewController: UIViewController, HomeViewModelDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        authHandle = Auth.auth().addStateDidChangeListener({[weak self] auth, user in
+        viewModel?.authListener?.addAuthUserListener(completion: {[weak self] user in
             if user == nil {
                 self?.setupRootViewController(viewController: LoginViewController.make())
             }else {
@@ -71,10 +78,7 @@ final class HomeViewController: UIViewController, HomeViewModelDelegate {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        if let authHandle = authHandle {
-            Auth.auth().removeStateDidChangeListener(authHandle)
-        }
-       
+        viewModel?.authListener?.removeAuthUserListener()
     }
     
     private func setConstraints() {
@@ -180,7 +184,7 @@ extension HomeViewController: CustomCellDelegate {
                 case .success(_):
                     //TODO: This is not working!!!!!
                     print("dsds")
-                  self?.cellarTableView.reloadData()
+                    self?.cellarTableView.reloadData()
                 case .failure(_):
                     print("Update fail")
                 }
