@@ -9,15 +9,17 @@ import Foundation
 import FirebaseAuth
 
 final class LoginViewModel: LoginViewModelProtocol {
+    var cellarUserService: CellarUserServiceProtocol?
+    
     var email: String? {
         didSet {
+            checkFormValidity()
             checkFormValidity()
         }
     }
     
     var password: String? {
         didSet {
-            checkFormValidity()
         }
     }
     
@@ -39,10 +41,20 @@ final class LoginViewModel: LoginViewModelProtocol {
             guard let strongSelf = self else {return}
             switch result {
             case .success(let user):
-                let defaults = UserDefaults.standard
-                defaults.setValue(user?.id, forKey: "currentUserID")
-                strongSelf.delegate?.handleViewModelOutput(.showLoading(false, ""))
-                strongSelf.delegate?.handleViewModelOutput(.userLoggedIn(true,""))
+                strongSelf.cellarUserService?.getCellarUser(cellarUserID: user.id, completion: { result in
+                    switch result {
+                    case .success(let cellarUser):
+                        do {
+                            try CellarUserManager.shared.setCellarUser(cellarUser: cellarUser)
+                        }catch {
+                            strongSelf.delegate?.handleViewModelOutput(.userLoggedIn(false, error.localizedDescription))
+                        }
+                        strongSelf.delegate?.handleViewModelOutput(.showLoading(false, ""))
+                        strongSelf.delegate?.handleViewModelOutput(.userLoggedIn(true, ""))
+                    case .failure(let failure):
+                        strongSelf.delegate?.handleViewModelOutput(.userLoggedIn(false, failure.localizedDescription))
+                    }
+                })
             case .failure(let failure):
                 strongSelf.delegate?.handleViewModelOutput(.userLoggedIn(false, failure.localizedDescription))
             }

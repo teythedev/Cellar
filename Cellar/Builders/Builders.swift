@@ -10,10 +10,10 @@ extension HomeViewController {
     static func make() -> UIViewController {
         let homeViewController = HomeViewController()
         let authListener = FireBaseAuthListerner()
-        let databaseService = FirebaseDataBaseService()
+        let cellarService = FirebaseCellarService()
         let navigationController = UINavigationController(rootViewController: homeViewController)
         homeViewController.viewModel = HomeViewModel()
-        homeViewController.viewModel?.databaseService = databaseService
+        homeViewController.viewModel?.cellarService = cellarService
         homeViewController.viewModel?.authListener = authListener
         return navigationController
     }
@@ -36,9 +36,9 @@ extension RegisterViewController {
     static func make() -> UIViewController {
         let register = RegisterViewController()
         let authService = FirebaseAuthService()
-        let firebaseDatabaseService = FirebaseDataBaseService()
+        let cellarUserService = FirebaseCellarUserService()
         register.viewModel = RegisterViewModel()
-        register.viewModel?.databaseService = firebaseDatabaseService
+        register.viewModel?.cellarUserService = cellarUserService
         register.viewModel?.authService = authService
         return register
     }

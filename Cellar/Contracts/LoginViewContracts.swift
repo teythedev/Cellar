@@ -23,6 +23,8 @@ protocol LoginViewModelProtocol {
     
     var authService: AuthServiceProtocol? { get set }
     
+    var cellarUserService: CellarUserServiceProtocol? {get set}
+    
     var isFormValid: Bindable<Bool> { get set }
     
     var email: String? {get set}

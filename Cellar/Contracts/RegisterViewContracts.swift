@@ -24,7 +24,8 @@ protocol RegisteViewModelProtocol {
     
     var authService: AuthServiceProtocol? { get set }
     
-    var databaseService: FirebaseDataBaseService? {get set}
+    //var databaseService: FirebaseDataBaseService? {get set}
+    var cellarUserService: CellarUserServiceProtocol? {get set}
     
     var isFormValid: Bindable<Bool> { get set }
     

@@ -8,10 +8,9 @@
 import Foundation
 import FirebaseAuth
 final class HomeViewModel: HomeViewModelProtocol {
+    var cellarService: CellarServiceProtocol?
  
     var authListener: FireBaseAuthListenerProtocol?
-    
-    var databaseService: FirebaseDataBaseService?
     
     func updateProduct(index: Int, product: Product, completion: @escaping ((Result<Bool, Error>) -> ())) {
         //TODO: Service.updateProduct
@@ -32,7 +31,16 @@ final class HomeViewModel: HomeViewModelProtocol {
     func fetchOwnedProducts(completion: @escaping (Result<String, Error>) -> ()) {
         delegate?.handleViewModelOutput(.showLoading(true, "Products Loading"))
         //TODO: Service.fetchProduct Method here
-       
+        cellarService?.getCellar(completion: {[weak self] result in
+            guard let strongSelf = self else {return}
+            switch result {
+            case .success(let cellar):
+                strongSelf.products = cellar.products
+                completion(.success(""))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        })
         products = Temps.products
 
         completion(.success("Success"))

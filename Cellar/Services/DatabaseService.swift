@@ -15,9 +15,6 @@ enum Collections: String {
     
 }
 
-protocol APIResource {
-    associatedtype Response: DatabaseObject;
-}
 
 protocol DatabaseObject: Codable {
     var id: String {get}
@@ -25,6 +22,11 @@ protocol DatabaseObject: Codable {
 }
 
 final class FirebaseDataBaseService {
+    
+    static let shared = FirebaseDataBaseService()
+    
+    private init(){}
+        
     func getDocument<T: DatabaseObject>(
         _ t: T.Type,
         collectionPath: Collections,
@@ -39,6 +41,37 @@ final class FirebaseDataBaseService {
             case .failure(let failure):
                 completion(.failure(failure))
             }
+        }
+    }
+    
+    func getDocumentsWithIsEqualTo<T: DatabaseObject>(
+        _ t: T.Type,
+        collectionPath: Collections,
+        whereField: String,
+        isEqualTo: Any,
+        completion: @escaping ((Result<[T],Error>) -> ())
+    ) {
+        let db = Firestore.firestore()
+        db.collection(collectionPath.rawValue).whereField(whereField, isEqualTo: isEqualTo).getDocuments { snapshot, error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                var resultArray: [T] = []
+                guard let documents = snapshot?.documents else {
+                    completion(.failure(NSError(domain: "Document Error", code: 0)))
+                    return
+                }
+                for document in documents {
+                    do {
+                        let data = try document.data(as: T.self)
+                        resultArray.append(data)
+                    }catch let error {
+                        completion(.failure(error))
+                    }
+                }
+                completion(.success(resultArray))
+            }
+            
         }
     }
     
@@ -106,3 +139,5 @@ final class FirebaseDataBaseService {
         
     }
 }
+
+

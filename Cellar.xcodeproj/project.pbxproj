@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB0728D72A40F17C007561AB /* CellarUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0728D62A40F17C007561AB /* CellarUserManager.swift */; };
+		AB0728D92A41034E007561AB /* CellarUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0728D82A41034E007561AB /* CellarUserService.swift */; };
 		AB290C0B2A3F964300063D8E /* AddProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB290C0A2A3F964300063D8E /* AddProductViewController.swift */; };
 		AB290C0D2A3FAE2100063D8E /* CellarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB290C0C2A3FAE2100063D8E /* CellarService.swift */; };
 		AB36D0BC2A0FAC1200CE9DFC /* CustomCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB36D0BB2A0FAC1200CE9DFC /* CustomCellViewModel.swift */; };
@@ -26,7 +28,7 @@
 		AB9DE34E2A0C33670069B30E /* UIView+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9DE34D2A0C33670069B30E /* UIView+ext.swift */; };
 		AB9DE3512A0C339B0069B30E /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9DE3502A0C339B0069B30E /* Bindable.swift */; };
 		AB9DE3532A0C33AB0069B30E /* temps.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9DE3522A0C33AB0069B30E /* temps.swift */; };
-		AB9DE3562A0C33CA0069B30E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9DE3552A0C33CA0069B30E /* User.swift */; };
+		AB9DE3562A0C33CA0069B30E /* CellarUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9DE3552A0C33CA0069B30E /* CellarUser.swift */; };
 		AB9DE35B2A0C340E0069B30E /* LoginViewContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9DE35A2A0C340E0069B30E /* LoginViewContracts.swift */; };
 		AB9DE35D2A0C34290069B30E /* RegisterViewContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9DE35C2A0C34290069B30E /* RegisterViewContracts.swift */; };
 		AB9DE35F2A0C35120069B30E /* HomeViewContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9DE35E2A0C35120069B30E /* HomeViewContracts.swift */; };
@@ -46,6 +48,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AB0728D62A40F17C007561AB /* CellarUserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellarUserManager.swift; sourceTree = "<group>"; };
+		AB0728D82A41034E007561AB /* CellarUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellarUserService.swift; sourceTree = "<group>"; };
 		AB290C0A2A3F964300063D8E /* AddProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductViewController.swift; sourceTree = "<group>"; };
 		AB290C0C2A3FAE2100063D8E /* CellarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellarService.swift; sourceTree = "<group>"; };
 		AB36D0BB2A0FAC1200CE9DFC /* CustomCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCellViewModel.swift; sourceTree = "<group>"; };
@@ -64,7 +68,7 @@
 		AB9DE34D2A0C33670069B30E /* UIView+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ext.swift"; sourceTree = "<group>"; };
 		AB9DE3502A0C339B0069B30E /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 		AB9DE3522A0C33AB0069B30E /* temps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = temps.swift; sourceTree = "<group>"; };
-		AB9DE3552A0C33CA0069B30E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		AB9DE3552A0C33CA0069B30E /* CellarUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellarUser.swift; sourceTree = "<group>"; };
 		AB9DE35A2A0C340E0069B30E /* LoginViewContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewContracts.swift; sourceTree = "<group>"; };
 		AB9DE35C2A0C34290069B30E /* RegisterViewContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewContracts.swift; sourceTree = "<group>"; };
 		AB9DE35E2A0C35120069B30E /* HomeViewContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewContracts.swift; sourceTree = "<group>"; };
@@ -120,6 +124,8 @@
 				AB87BED42A23F64600BFC215 /* AuthService.swift */,
 				AB6B3F092A28528000C977C3 /* DatabaseService.swift */,
 				AB290C0C2A3FAE2100063D8E /* CellarService.swift */,
+				AB0728D62A40F17C007561AB /* CellarUserManager.swift */,
+				AB0728D82A41034E007561AB /* CellarUserService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -186,7 +192,7 @@
 		AB9DE3542A0C33C10069B30E /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				AB9DE3552A0C33CA0069B30E /* User.swift */,
+				AB9DE3552A0C33CA0069B30E /* CellarUser.swift */,
 				ABA1F1D62A1432E9006676A1 /* Product.swift */,
 				ABF812782A31134D00AC50B5 /* Cellar.swift */,
 			);
@@ -336,6 +342,7 @@
 				AB9DE3512A0C339B0069B30E /* Bindable.swift in Sources */,
 				AB9DE36F2A0C361A0069B30E /* HomeViewModel.swift in Sources */,
 				AB8E2C6E2A197278005CEA97 /* Helpers.swift in Sources */,
+				AB0728D92A41034E007561AB /* CellarUserService.swift in Sources */,
 				AB9DE3532A0C33AB0069B30E /* temps.swift in Sources */,
 				AB87BED22A23DEF900BFC215 /* UIViewController+ext.swift in Sources */,
 				AB87BED52A23F64600BFC215 /* AuthService.swift in Sources */,
@@ -348,6 +355,7 @@
 				AB9DE35B2A0C340E0069B30E /* LoginViewContracts.swift in Sources */,
 				AB9DE36C2A0C35F30069B30E /* CustomCell.swift in Sources */,
 				AB290C0B2A3F964300063D8E /* AddProductViewController.swift in Sources */,
+				AB0728D72A40F17C007561AB /* CellarUserManager.swift in Sources */,
 				AB9DE35F2A0C35120069B30E /* HomeViewContracts.swift in Sources */,
 				ABA1F1D52A143027006676A1 /* CustomCellViewContracts.swift in Sources */,
 				AB9DE3712A0C36320069B30E /* LoginViewModel.swift in Sources */,
@@ -357,7 +365,7 @@
 				AB9DE33B2A0C33310069B30E /* SceneDelegate.swift in Sources */,
 				AB6B3F0A2A28528000C977C3 /* DatabaseService.swift in Sources */,
 				AB9DE3662A0C35910069B30E /* RegisterViewController.swift in Sources */,
-				AB9DE3562A0C33CA0069B30E /* User.swift in Sources */,
+				AB9DE3562A0C33CA0069B30E /* CellarUser.swift in Sources */,
 				AB9DE35D2A0C34290069B30E /* RegisterViewContracts.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

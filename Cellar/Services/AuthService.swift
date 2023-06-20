@@ -11,8 +11,9 @@ import FirebaseAuth
 typealias FirebaseAuthUser = FirebaseAuth.User
 
 protocol AuthServiceProtocol{
-    func loginWith(email: String, password: String, completion: @escaping ((Result<CellarUser?,Error>) -> ()))
-    func registerWith(email:String, password: String, completion: @escaping ((Result<CellarUser?,Error>) -> ()))
+    func loginWith(email: String, password: String, completion: @escaping ((Result<CellarUser,Error>) -> ()))
+    func registerWith(email:String, password: String, completion: @escaping ((Result<CellarUser,Error>) -> ()))
+    func signOut(completion: @escaping ((Result<Bool,Error>) -> ()))
 }
 
 protocol FireBaseAuthListenerProtocol {
@@ -43,7 +44,7 @@ final class FirebaseAuthService: AuthServiceProtocol {
         case NilUserError = "Nil User"
     }
     
-    func loginWith(email: String, password: String, completion: @escaping ((Result<CellarUser?, Error>) -> ())) {
+    func loginWith(email: String, password: String, completion: @escaping ((Result<CellarUser, Error>) -> ())) {
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             if let error = error {
                 completion(.failure(error))
@@ -59,7 +60,7 @@ final class FirebaseAuthService: AuthServiceProtocol {
         }
     }
     
-    func registerWith(email: String, password: String, completion: @escaping ((Result<CellarUser?, Error>) -> ())) {
+    func registerWith(email: String, password: String, completion: @escaping ((Result<CellarUser, Error>) -> ())) {
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
             if let error = error {
                 completion(.failure(error))
@@ -71,6 +72,15 @@ final class FirebaseAuthService: AuthServiceProtocol {
                     completion(.failure(FireBaseAuthError.NilUserError))
                 }
             }
+        }
+    }
+    
+    func signOut(completion: @escaping ((Result<Bool, Error>) -> ())) {
+        do {
+            try Auth.auth().signOut()
+            completion(.success(true))
+        } catch {
+            completion(.failure(error))
         }
     }
 }

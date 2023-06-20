@@ -8,46 +8,38 @@
 import Foundation
 
 protocol CellarServiceProtocol {
-    func getCellars()
-    func getCellar() -> Cellar?
+    func getCellar(completion: @escaping (Result<Cellar,Error>) ->())
     func addProductToCellar()
     func deleteProductFromCellar()
     func updateProductInCellar()
-    
-    var firebaseDatabaseService: FirebaseDataBaseService? {get set}
 }
 
 
-final class CellarService: CellarServiceProtocol {
-    var firebaseDatabaseService: FirebaseDataBaseService?
+final class FirebaseCellarService: CellarServiceProtocol {
     
-    
-    func getCellars() {
-        
-    }
-    
-    func getCellar() -> Cellar? {
-        guard let firebaseDatabaseService = firebaseDatabaseService else {return nil}
-        firebaseDatabaseService.getDocument(Cellar.self,collectionPath: Collections.cellars, documentID: "") { result in
+    func getCellar(completion: @escaping (Result<Cellar, Error>) -> ()) {
+        guard let currentCellarID = CellarUserManager.shared.cellarUser?.currentCellarID else {return}
+        let firebaseDatabaseService = FirebaseDataBaseService.shared
+        firebaseDatabaseService.getDocument(Cellar.self,collectionPath: Collections.cellars, documentID: currentCellarID) { result in
             switch result {
-            case .success(let success):
-                return nil
-            case .failure(let failure):
-                return nil
+            case .success(let cellar):
+                completion(.success(cellar))
+            case .failure(let error):
+                completion(.failure(error))
             }
         }
     }
     
     func addProductToCellar() {
-        <#code#>
+        //TODO: -
     }
     
     func deleteProductFromCellar() {
-        <#code#>
+        //TODO: -
     }
     
     func updateProductInCellar() {
-        <#code#>
+        //TODO: -
     }
     
     

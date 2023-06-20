@@ -19,7 +19,7 @@ enum HomeViewModelOutput {
 
 protocol HomeViewModelProtocol {
     var authListener: FireBaseAuthListenerProtocol? {get set}
-    var databaseService: FirebaseDataBaseService? {get set}
+    var cellarService: CellarServiceProtocol? {get set}
     var delegate: HomeViewModelDelegate? { get set }
     var products: [Product]? {get set}
     func fetchOwnedProducts(completion: @escaping (Result<String,Error>) -> ())

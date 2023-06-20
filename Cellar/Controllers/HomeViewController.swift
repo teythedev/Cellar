@@ -22,9 +22,17 @@ final class HomeViewController: UIViewController, HomeViewModelDelegate {
             }
         case .showAddProductModal:
             let addProductViewController = AddProductViewController()
-            present(addProductViewController, animated: true) {
-                
-            }
+//            present(addProductViewController, animated: true) { [weak self] in
+//                guard let strongSelf = self else {return}
+//                strongSelf.viewModel?.fetchOwnedProducts(completion: { result in
+//                    switch result {
+//                    case .success(let success):
+//                        //TODO: -
+//                    case .failure(let failure):
+//                        //TODO: -
+//                    }
+//                })
+//            }
         }
         
     }
@@ -51,7 +59,7 @@ final class HomeViewController: UIViewController, HomeViewModelDelegate {
         cellarTableView.estimatedRowHeight = 80
         setConstraints()
         viewModel?.delegate = self
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "bag.badge.plus"), style: .done, target: self, action: #selector(goToAddProductPage))
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "bag.badge.plus"), style: .done, target: self, action: #selector(goToAddProductPage))
        // navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .done, target: self, action: #selector(signOut))
     }
     
